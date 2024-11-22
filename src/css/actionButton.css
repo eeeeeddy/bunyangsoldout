@@ -1,0 +1,21 @@
+.kakao_icon {
+    z-index:10;
+    position:fixed; 
+    right:-2px;
+    bottom:100px;
+}
+
+.kakao_icon img {
+    width: 75%;
+}
+
+.call_icon {
+    z-index:10;
+    position:fixed; 
+    right:-2px;
+    bottom:20px;
+}
+
+.call_icon img {
+    width: 75%;
+}
