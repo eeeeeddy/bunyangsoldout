@@ -37,8 +37,9 @@ function RegistForm() {
     const fnSubmit = (e) => {
         const checkbox = document.getElementById("agreeCheck");
         if (!checkbox.checked) {
-            // e.preventDefault(); // 기본 동작을 막지 말고 Netlify로 데이터 전송을 허용해야 합니다.
+            e.preventDefault();
             alert("개인정보 수집 및 이용에 동의해야 합니다.");
+            return;
         }
     }
 
@@ -59,7 +60,7 @@ function RegistForm() {
                     <div className='mt-5'>
                         <p className='h1'>관심 고객 등록</p>
                     </div>
-                    <form className='mt-5' name="contact" method="POST" action='/' style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit} netlify>
+                    <form className='mt-5' name="contact" method="POST" action="/registSuccess" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit} netlify>
                         <input type="hidden" name="contact" value="contact" />
                         <div className="form-group mb-3">
                             <label className='text-start' for="name">이름</label>
