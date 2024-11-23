@@ -1,8 +1,8 @@
 import React from 'react';
-import '../css/Main.css';
+import '../css/main.css';
 import { PC, Mobile } from "../components/responsive";
-import NavBar from './NavBar';
-import ActionButton from './ActionButton';
+import NavBar from './navBar';
+import ActionButton from './actionButton';
 
 function Main() {
     return (
