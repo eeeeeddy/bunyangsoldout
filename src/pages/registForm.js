@@ -59,7 +59,7 @@ function RegistForm() {
                     <div className='mt-5'>
                         <p className='h1'>관심 고객 등록</p>
                     </div>
-                    <form className='mt-5' name="contact" method="POST" data-netlify="true" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit}>
+                    <form className='mt-5' name="contact" method="POST" action='/' style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit} netlify>
                         <input type="hidden" name="contact" value="contact" />
                         <div className="form-group mb-3">
                             <label className='text-start' for="name">이름</label>
