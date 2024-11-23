@@ -8,7 +8,7 @@ function NavBar() {
                 <nav id="navbar-example2" className="navbar bg-dark px-3 fixed-top">
                     <ul className="nav mx-auto justify-content-center">
                         <li className='nav-item'>
-                            <a className='nav-link text-white' href='#sec01' style={{ paddingTop: '0px', paddingBottom: '0px'}}>
+                            <a className='nav-link text-white' href='/' style={{ paddingTop: '0px', paddingBottom: '0px'}}>
                                 <img src={`${process.env.PUBLIC_URL}/favicon.png`} alt="logo" style={{ width: '44px', height: 'auto' }}/>
                             </a>
                         </li>
