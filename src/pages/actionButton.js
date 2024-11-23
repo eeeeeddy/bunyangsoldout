@@ -1,7 +1,7 @@
 import React from 'react';
-import '../css/actionButton.css';
+import '../css/ActionButton.css';
 
-function actionButton() {
+function ActionButton() {
     return (
         <div>
             <a class="kakao_icon" href="https://open.kakao.com/o/sAOffRXg">
@@ -14,4 +14,4 @@ function actionButton() {
     );
 }
 
-export default actionButton;
+export default ActionButton;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PC, Mobile } from "../components/responsive";
 
-function navbar() {
+function NavBar() {
     return (
         <div>
             <PC>
@@ -49,4 +49,4 @@ function navbar() {
     );
 }
 
-export default navbar;
+export default NavBar;

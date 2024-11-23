@@ -1,14 +1,14 @@
 import React from 'react';
-import '../css/main.css';
+import '../css/Main.css';
 import { PC, Mobile } from "../components/responsive";
-import Navbar from './navBar';
-import ActionButton from './actionButton';
+import NavBar from './NavBar';
+import ActionButton from './ActionButton';
 
 function Main() {
     return (
         <div className='' style={{ fontFamily: 'Nanum Gothic' }}>
             <div className='Navbar'>
-                <Navbar />
+                <NavBar />
             </div>
 
             <PC>

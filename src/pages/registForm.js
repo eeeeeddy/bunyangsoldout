@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PC, Mobile } from "../components/responsive";
-import Navbar from './navBar';
-import ActionButton from './actionButton';
+import Navbar from './NavBar';
+import ActionButton from './ActionButton';
 
-function registForm() {
+function RegistForm() {
+    const [telNo1, setTelNo1] = useState('');
+    const [telNo2, setTelNo2] = useState('');
+    const [telNo3, setTelNo3] = useState('');
+
     const policyPhrase = '나무기획(이하 ‘회사’라 한다)은 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다. \n\n'
                         + '제1조 (개인정보의 처리목적) \n'
                         + '회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다. \n'
@@ -21,10 +25,19 @@ function registForm() {
                         + '1) 관계 법령 위반에 따른 수사, 조사 등이 진행 중인 경우에는 해당 수사, 조사 종료 시까지 \n'
                         + '2) 홈페이지 이용에 따른 채권 및 채무관계 잔존 시에는 해당 채권, 채무 관계 정산 시까지'
 
+    const handleTelNoChange = (e) => {
+        const { id, value } = e.target;
+
+        // 각각의 입력 필드 업데이트
+        if (id === 'telNo1') setTelNo1(value);
+        if (id === 'telNo2') setTelNo2(value);
+        if (id === 'telNo3') setTelNo3(value);
+    };
+
     const fnSubmit = (e) => {
         const checkbox = document.getElementById("agreeCheck");
         if (!checkbox.checked) {
-            e.preventDefault();
+            // e.preventDefault(); // 기본 동작을 막지 말고 Netlify로 데이터 전송을 허용해야 합니다.
             alert("개인정보 수집 및 이용에 동의해야 합니다.");
         }
     }
@@ -47,14 +60,16 @@ function registForm() {
                         <p className='h1'>관심 고객 등록</p>
                     </div>
                     <form className='mt-5' name="contact" method="POST" data-netlify="true" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit}>
+                        <input type="hidden" name="contact" value="contact" />
                         <div className="form-group mb-3">
                             <label className='text-start' for="name">이름</label>
-                            <input type="text" className="form-control mt-1" id="name" aria-describedby="emailHelp" placeholder="" required/>
+                            <input type="text" className="form-control mt-1" id="name" name="name" aria-describedby="emailHelp" placeholder="" required/>
                         </div>
                         <div className="form-group mb-3">
                             <label for="telNo">연락처</label>
                             <div className="d-flex align-items-center gap-2 mt-1" style={{width: "50%"}}>
-                                <select className="form-control mt-1" id="telNo1" required>
+                                <input type="hidden" className="mt-1" name="telNo" value={`${telNo1}-${telNo2}-${telNo3}`}/>
+                                <select className="form-control mt-1" id="telNo1" value={telNo1} onChange={handleTelNoChange} required>
                                     <option value="">선택</option>
                                     <option value="010">010</option>
                                     <option value="011">011</option>
@@ -63,13 +78,13 @@ function registForm() {
                                     <option value="018">018</option>
                                     <option value="019">019</option>
                                 </select>
-                                <input type="text" className="form-control mt-1" id="telNo2" placeholder="" maxLength="4" onInput={fnTelNoValidation} required/>
-                                <input type="text" className="form-control mt-1" id="telNo3" placeholder="" maxLength="4" onInput={fnTelNoValidation} required/>
+                                <input type="text" className="form-control mt-1" id="telNo2" value={telNo2} onChange={handleTelNoChange} maxLength="4" onInput={fnTelNoValidation} required/>
+                                <input type="text" className="form-control mt-1" id="telNo3" value={telNo3} onChange={handleTelNoChange} maxLength="4" onInput={fnTelNoValidation} required/>
                             </div>
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor="exampleTextarea">개인 정보 수집 및 이용 동의</label>
-                            <textarea className="form-control mt-1" id="exampleTextarea" placeholder={policyPhrase} style={{ height: '200px', overflowY: 'scroll', resize: 'none' }}/>
+                            <label>개인 정보 수집 및 이용 동의</label>
+                            <textarea className="form-control mt-1" placeholder={policyPhrase} style={{ height: '200px', overflowY: 'scroll', resize: 'none' }}/>
                         </div>
                         <div className="form-check">
                             <input type="checkbox" className="form-check-input" id="agreeCheck" />
@@ -89,4 +104,4 @@ function registForm() {
     );
 }
 
-export default registForm;
+export default RegistForm;
