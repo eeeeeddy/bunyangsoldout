@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../src/css/App.css';
-import Main from './pages/Main.js';
+import Main from './pages/main.js';
 import RegistForm from './pages/RegistForm.js';
 
 function App() {
