@@ -45,9 +45,23 @@ function RegistForm() {
         }
 
         // 경고창 띄운 후 폼을 제출
-        alert("폼이 성공적으로 제출되었습니다!");
+        // alert("폼이 성공적으로 제출되었습니다!");
         // Netlify 폼 제출을 진행
-        e.target.submit();
+        // e.target.submit();
+
+        // Netlify 폼 제출을 자동으로 처리하도록 하기 위해 action을 제거하고 데이터 제출
+        const form = e.target;
+        const formData = new FormData(form);
+        fetch(form.action, { method: 'POST', body: formData,}).then(response => {
+            if (response.ok) {
+                // 폼 제출이 성공적으로 완료되면 추가 처리(필요시)
+                alert("폼 제출 완료!");
+            } else {
+                alert("폼 제출에 실패했습니다.");
+            }
+        }).catch(error => {
+            alert("폼 제출 중 오류가 발생했습니다.");
+        });
     }
 
     const fnTelNoValidation = (e) => {
@@ -67,7 +81,7 @@ function RegistForm() {
                     <div className='mt-5'>
                         <p className='h1'>관심 고객 등록</p>
                     </div>
-                    <form className='mt-5' name="contact" method="POST" data-netlify="true" action="/" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit}>
+                    <form className='mt-5' name="contact" method="POST" data-netlify="true" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit}>
                         <input type="hidden" name="contact" value="contact" />
                         <div className="form-group mb-3">
                             <label className='text-start' for="name">이름</label>
