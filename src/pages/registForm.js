@@ -52,13 +52,16 @@ function RegistForm() {
         // Netlify 폼 제출을 자동으로 처리하도록 하기 위해 action을 제거하고 데이터 제출
         const form = e.target;
         const formData = new FormData(form);
-        fetch(form.action || '/', { method: 'POST', body: formData,}).then(response => {
-            if (response.ok) {
-                // 폼 제출이 성공적으로 완료되면 추가 처리(필요시)
-                alert("폼 제출 완료!");
-            } else {
-                alert("폼 제출에 실패했습니다.");
-            }
+        fetch(form.action || '/', { 
+            method: 'POST', 
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+            }).then(response => {
+                if (response.ok) {
+                    alert("폼 제출 완료!");
+                } else {
+                    alert("폼 제출에 실패했습니다.");
+                }
         }).catch(error => {
             console.log(error)
             alert("폼 제출 중 오류가 발생했습니다.");
