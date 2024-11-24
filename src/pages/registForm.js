@@ -36,7 +36,7 @@ function RegistForm() {
         if (id === 'telNo3') setTelNo3(value);
     };
 
-    const fnSubmit = (e) => {
+    const fnSubmit = async (e) => {
         const checkbox = document.getElementById("agreeCheck");
         if (!checkbox.checked) {
             e.preventDefault();
@@ -44,28 +44,26 @@ function RegistForm() {
             return;
         }
 
-        // 경고창 띄운 후 폼을 제출
-        // alert("폼이 성공적으로 제출되었습니다!");
-        // Netlify 폼 제출을 진행
-        // e.target.submit();
+        // 폼 데이터 수집
+        const formData = new FormData(e.target);
 
-        // Netlify 폼 제출을 자동으로 처리하도록 하기 위해 action을 제거하고 데이터 제출
-        const form = e.target;
-        const formData = new FormData(form);
-        fetch(form.action || '/', { 
-            method: 'POST', 
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
-            }).then(response => {
-                if (response.ok) {
-                    alert("폼 제출 완료!");
-                } else {
-                    alert("폼 제출에 실패했습니다.");
-                }
-        }).catch(error => {
-            console.log(error)
+        try {
+            // API 요청
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            });
+
+            if (response.ok) {
+                alert("폼 제출 완료!");
+            } else {
+                alert("폼 제출에 실패했습니다.");
+            }
+        } catch (error) {
+            console.error(error);
             alert("폼 제출 중 오류가 발생했습니다.");
-        });
+        }
     }
 
     const fnTelNoValidation = (e) => {
