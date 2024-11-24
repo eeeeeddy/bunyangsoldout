@@ -48,14 +48,22 @@ function RegistForm() {
         const form = e.target;
         const formData = new FormData(form);
 
-        fetch('/', { method: 'POST', body: formData })
-            .then(() => {
-                // 폼 제출 성공 시 이동
-                navigate('/registSuccess');
+        // fetch('/', { method: 'POST', body: formData })
+        //     .then(() => {
+        //         // 폼 제출 성공 시 이동
+        //         navigate('/registSuccess');
+        //     })
+        //     .catch((error) => {
+        //         alert("관심 고객 등록 중 오류가 발생했습니다.");
+        //     });
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
             })
-            .catch((error) => {
-                alert("관심 고객 등록 중 오류가 발생했습니다.");
-            });
+            .then(() => navigate("/thank-you/"))
+            .catch(error => alert(error));
     }
 
     const fnTelNoValidation = (e) => {
@@ -75,7 +83,7 @@ function RegistForm() {
                     <div className='mt-5'>
                         <p className='h1'>관심 고객 등록</p>
                     </div>
-                    <form className='mt-5' name="contact" method="POST" action="/registSuccess" data-netlify="true" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit}>
+                    <form className='mt-5' name="contact" method="POST" data-netlify="true" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit}>
                         <input type="hidden" name="contact" value="contact" />
                         <div className="form-group mb-3">
                             <label className='text-start' for="name">이름</label>
