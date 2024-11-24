@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useNavigate } from 'react';
 import { PC, Mobile } from "../components/responsive";
 import Navbar from './navBar';
 import ActionButton from './actionButton';
@@ -7,6 +7,7 @@ function RegistForm() {
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
     const [telNo3, setTelNo3] = useState('');
+    const navigate = useNavigate();
 
     const policyPhrase = '나무기획(이하 ‘회사’라 한다)은 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다. \n\n'
                         + '제1조 (개인정보의 처리목적) \n'
@@ -41,6 +42,19 @@ function RegistForm() {
             alert("개인정보 수집 및 이용에 동의해야 합니다.");
             return;
         }
+
+        // Netlify에 폼 데이터를 전송
+        const form = e.target;
+        const formData = new FormData(form);
+
+        fetch('/', { method: 'POST', body: formData })
+            .then(() => {
+                // 폼 제출 성공 시 이동
+                navigate('/registSuccess');
+            })
+            .catch((error) => {
+                alert("관심 고객 등록 중 오류가 발생했습니다.");
+            });
     }
 
     const fnTelNoValidation = (e) => {
