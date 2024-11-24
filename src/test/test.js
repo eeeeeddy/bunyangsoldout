@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Test() {
-    const navigate = useNavigate(); // useNavigate 호출
+    const navigate = useNavigate();
     const [val, setVal] = useState('');
 
     const handleSubmit = event => {
@@ -11,7 +11,7 @@ function Test() {
         const myForm = event.target;
         const formData = new FormData(myForm);
 
-        fetch("https://xn--sr3b80mmpaq32b.com/", {
+        fetch("bunyangsoldout.netlify.app/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams(formData).toString()
