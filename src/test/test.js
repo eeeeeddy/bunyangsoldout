@@ -8,16 +8,17 @@ function Test() {
     const handleSubmit = event => {
         event.preventDefault();
 
-        const myForm = event.target;
-        const formData = new FormData(myForm);
+        // const myForm = event.target;
+        // const formData = new FormData(myForm);
 
-        fetch("bunyangsoldout.netlify.app/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
-        })
-        .then(() => navigate("/registSuccess/")) // navigate 호출
-        .catch(error => alert(error));
+        // fetch("bunyangsoldout.netlify.app/", {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        //     body: new URLSearchParams(formData).toString()
+        // })
+        // .then(() => navigate("/registSuccess/")) // navigate 호출
+        // .catch(error => alert(error));
+        navigate("/registSuccess/");
     };
 
     const handleChange = event => {
