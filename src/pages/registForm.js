@@ -63,8 +63,13 @@ function RegistForm() {
 
         emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
             result => {
-                fnSendKakao();
-                navigate("/registSuccess");
+                if (window.Kakao) {
+                    fnSendKakao();
+                    navigate("/registSuccess");
+                } else {
+                    alert("등록에 실패하였습니다. 다시 등록해주세요.")
+                }
+                // navigate("/registSuccess");
             },
             error => {
                 console.log(error)
