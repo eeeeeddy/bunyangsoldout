@@ -30,6 +30,14 @@ function RegistSuccess() {
             </PC>
 
             <Mobile>
+                <div className='justify-content-center mt-5'>
+                    <div style={{height: '40px'}}/>
+                    <div className='mt-5'>
+                        <p className='h5'>관심 고객 등록이 완료되었습니다. </p>
+                        <p className='h5'>감사합니다.</p>
+                    </div>
+                    <button className="btn btn-dark mt-5" onClick={goToHome}>Home으로</button>
+                </div>
             </Mobile>
 
             <ActionButton />
