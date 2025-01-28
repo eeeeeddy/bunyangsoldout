@@ -4,6 +4,7 @@ import { PC, Mobile } from "../components/responsive";
 import Navbar from './navBar';
 import ActionButton from './actionButton';
 import emailjs from '@emailjs/browser';
+import Kakao from '../../public/js/kakao.min.js';
 
 function RegistForm() {
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID
@@ -74,8 +75,7 @@ function RegistForm() {
     };
 
     const fnSendKakao = (e) =>{
-        console.log(cutomerName, `${telNo1}-${telNo2}-${telNo3}`)
-        window.Kakao.Share.sendCustom({
+        Kakao.Share.sendCustom({
             templateId: 116790,
             templateArgs: {
                 site_name: "분양완판",
