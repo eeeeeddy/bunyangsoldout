@@ -9,11 +9,15 @@ function RegistForm() {
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID
     const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID
     const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_API_KEY
+
     const navigate = useNavigate();
+    const form = useRef();
+
+    const [cutomerName, setCustomerName] = useState('');
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
     const [telNo3, setTelNo3] = useState('');
-    const form = useRef();
+    
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
@@ -34,13 +38,17 @@ function RegistForm() {
                         + '1) 관계 법령 위반에 따른 수사, 조사 등이 진행 중인 경우에는 해당 수사, 조사 종료 시까지 \n'
                         + '2) 홈페이지 이용에 따른 채권 및 채무관계 잔존 시에는 해당 채권, 채무 관계 정산 시까지'
 
-    const handleTelNoChange = (e) => {
+    const fnSetTelNo = (e) => {
         const { id, value } = e.target;
 
         // 각각의 입력 필드 업데이트
         if (id === 'telNo1') setTelNo1(value);
         if (id === 'telNo2') setTelNo2(value);
         if (id === 'telNo3') setTelNo3(value);
+    };
+
+    const fnSetCustomerName = (e) => {
+        setCustomerName(e.target.value);
     };
 
     const fnSendEmail = (e) => {
@@ -55,6 +63,7 @@ function RegistForm() {
 
         emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
             result => {
+                fnSendKakao();
                 navigate("/registSuccess");
             },
             error => {
@@ -64,9 +73,24 @@ function RegistForm() {
         );
     };
 
+    const fnSendKakao = (e) =>{
+        console.log('Kakao');
+        window.Kakao.Share.sendCustom({
+            templateId: 1164819,
+            templateArgs: {
+                site_name: "분양완판",
+                customer_name: cutomerName,
+                customer_telNo: `${telNo1}-${telNo2}-${telNo3}`
+            },
+            serverCallbackArgs: {
+                isSendSuccess: "yes"
+            }
+        });
+    };
+
     const fnTelNoValidation = (e) => {
         e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4);
-    }
+    };
 
     return (
         <div className='' style={{ fontFamily: 'Nanum Gothic' }}>
@@ -85,14 +109,14 @@ function RegistForm() {
                         <input type="hidden" className='text-center' name="site_name" value={`분양완판`}></input>
                         <input type="hidden" className='text-center' name="date" value={`${formattedDate}`}></input>
                         <div className="form-group mb-3">
-                            <label className='text-start' for="name">이름</label>
-                            <input type="text" className="form-control mt-1" id="name" name="customer_name" placeholder="" required/>
+                            <label className='text-start'>이름</label>
+                            <input type="text" className="form-control mt-1" name="customer_name" placeholder="" onChange={fnSetCustomerName} required/>
                         </div>
                         <div className="form-group mb-3">
-                            <label for="telNo">연락처</label>
+                            <label>연락처</label>
                             <div className="d-flex align-items-center gap-2 mt-1" style={{width: "50%"}}>
                                 <input type="hidden" className="mt-1" name="customer_telNo" value={`${telNo1}-${telNo2}-${telNo3}`}/>
-                                <select className="form-control mt-1" id="telNo1" value={telNo1} onChange={handleTelNoChange} required>
+                                <select className="form-control mt-1" id="telNo1" value={telNo1} onChange={fnSetTelNo} required>
                                     <option value="">선택</option>
                                     <option value="010">010</option>
                                     <option value="011">011</option>
@@ -101,17 +125,17 @@ function RegistForm() {
                                     <option value="018">018</option>
                                     <option value="019">019</option>
                                 </select>
-                                <input type="text" className="form-control mt-1" id="telNo2" value={telNo2} onChange={handleTelNoChange} maxLength="4" onInput={fnTelNoValidation} required/>
-                                <input type="text" className="form-control mt-1" id="telNo3" value={telNo3} onChange={handleTelNoChange} maxLength="4" onInput={fnTelNoValidation} required/>
+                                <input type="text" className="form-control mt-1" id="telNo2" value={telNo2} onChange={fnSetTelNo} maxLength="4" onInput={fnTelNoValidation} required/>
+                                <input type="text" className="form-control mt-1" id="telNo3" value={telNo3} onChange={fnSetTelNo} maxLength="4" onInput={fnTelNoValidation} required/>
                             </div>
                         </div>
                         <div className="form-group mb-3">
                             <label>개인 정보 수집 및 이용 동의</label>
-                            <textarea className="form-control mt-1" placeholder={policyPhrase} style={{ height: '200px', overflowY: 'scroll', resize: 'none' }}/>
+                            <textarea className="form-control mt-1" placeholder={policyPhrase} style={{ height: '200px', overflowY: 'scroll', resize: 'none' }} readOnly={true}/>
                         </div>
                         <div className="form-check">
                             <input type="checkbox" className="form-check-input" id="agreeCheck" />
-                            <label className="form-check-label" for="agreeCheck">개인정보 수집 및 이용에 동의합니다.</label>
+                            <label className="form-check-label">개인정보 수집 및 이용에 동의합니다.</label>
                         </div>
                         
                         <button type="submit" className="btn btn-dark mt-3">작성</button>
@@ -128,14 +152,14 @@ function RegistForm() {
                         <input type="hidden" className='text-center' name="site_name" value={`분양완판`}></input>
                         <input type="hidden" className='text-center' name="date" value={`${formattedDate}`}></input>
                         <div className="form-group mb-3">
-                            <label className='text-start' for="name">이름</label>
-                            <input type="text" className="form-control mt-1" id="name" name="customer_name" placeholder="" required/>
+                            <label className='text-start'>이름</label>
+                            <input type="text" className="form-control mt-1" name="customer_name" placeholder="" onChange={fnSetCustomerName} required/>
                         </div>
                         <div className="form-group mb-3">
-                            <label for="telNo">연락처</label>
+                            <label>연락처</label>
                             <div className="d-flex align-items-center gap-2 mt-1" style={{width: "100%"}}>
                                 <input type="hidden" className="mt-1" name="customer_telNo" value={`${telNo1}-${telNo2}-${telNo3}`}/>
-                                <select className="form-control mt-1" id="telNo1" value={telNo1} onChange={handleTelNoChange} required>
+                                <select className="form-control mt-1" id="telNo1" value={telNo1} onChange={fnSetTelNo} required>
                                     <option value="">선택</option>
                                     <option value="010">010</option>
                                     <option value="011">011</option>
@@ -144,17 +168,17 @@ function RegistForm() {
                                     <option value="018">018</option>
                                     <option value="019">019</option>
                                 </select>
-                                <input type="text" className="form-control mt-1" id="telNo2" value={telNo2} onChange={handleTelNoChange} maxLength="4" onInput={fnTelNoValidation} required/>
-                                <input type="text" className="form-control mt-1" id="telNo3" value={telNo3} onChange={handleTelNoChange} maxLength="4" onInput={fnTelNoValidation} required/>
+                                <input type="text" className="form-control mt-1" id="telNo2" value={telNo2} onChange={fnSetTelNo} maxLength="4" onInput={fnTelNoValidation} required/>
+                                <input type="text" className="form-control mt-1" id="telNo3" value={telNo3} onChange={fnSetTelNo} maxLength="4" onInput={fnTelNoValidation} required/>
                             </div>
                         </div>
                         <div className="form-group mb-3">
                             <label>개인 정보 수집 및 이용 동의</label>
-                            <textarea className="form-control mt-1" placeholder={policyPhrase} style={{ height: '200px', overflowY: 'scroll', resize: 'none' }}/>
+                            <textarea className="form-control mt-1" placeholder={policyPhrase} style={{ height: '200px', overflowY: 'scroll', resize: 'none' }} readOnly={true}/>
                         </div>
                         <div className="form-check">
                             <input type="checkbox" className="form-check-input" id="agreeCheck" />
-                            <label className="form-check-label" for="agreeCheck">개인정보 수집 및 이용에 동의합니다.</label>
+                            <label className="form-check-label">개인정보 수집 및 이용에 동의합니다.</label>
                         </div>
                         
                         <button type="submit" className="btn btn-dark mt-3">작성</button>

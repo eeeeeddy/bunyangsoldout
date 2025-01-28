@@ -12,8 +12,8 @@ function ActionButton() {
     return (
         <div>
             <div className="reg_customer" target="_blank" onClick={fnGoRegist} style={{ cursor: 'pointer' }}>
-                <div class="reg_customer_div">
-                    <p class="reg_customer_p">관심고객 등록</p>
+                <div className="reg_customer_div">
+                    <p className="reg_customer_p">관심고객 등록</p>
                 </div>
             </div>
             <a className="kakao_icon" href="https://open.kakao.com/o/sAOffRXg">
