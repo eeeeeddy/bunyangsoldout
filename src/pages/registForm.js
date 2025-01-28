@@ -9,7 +9,7 @@ function RegistForm() {
     const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID
     const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID
     const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_API_KEY
-
+    
     const navigate = useNavigate();
     const form = useRef();
 
@@ -74,9 +74,8 @@ function RegistForm() {
     };
 
     const fnSendKakao = (e) =>{
-        console.log('Kakao');
         window.Kakao.Share.sendCustom({
-            templateId: 1164819,
+            templateId: 116790,
             templateArgs: {
                 site_name: "분양완판",
                 customer_name: cutomerName,
