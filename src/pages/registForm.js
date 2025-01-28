@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PC, Mobile } from "../components/responsive";
 import Navbar from './navBar';
 import ActionButton from './actionButton';
+import emailjs from '@emailjs/browser';
 
 function RegistForm() {
+    const serviceId = process.env.EMAILJS_SERVICE_ID
+    const templateId = process.env.EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.EMAILJS_PUBLIC_API_KEY
+    const navigate = useNavigate();
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
     const [telNo3, setTelNo3] = useState('');
-    // const navigate = useNavigate();
+    const form = useRef();
+    const date = new Date();
+    const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
     const policyPhrase = '나무기획(이하 ‘회사’라 한다)은 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다. \n\n'
                         + '제1조 (개인정보의 처리목적) \n'
@@ -36,7 +43,9 @@ function RegistForm() {
         if (id === 'telNo3') setTelNo3(value);
     };
 
-    const fnSubmit = async (e) => {
+    const fnSendEmail= (e) => {
+        e.preventDefault();
+
         const checkbox = document.getElementById("agreeCheck");
         if (!checkbox.checked) {
             e.preventDefault();
@@ -44,27 +53,15 @@ function RegistForm() {
             return;
         }
 
-        // 폼 데이터 수집
-        const formData = new FormData(e.target);
-
-        try {
-            // API 요청
-            const response = await fetch('/', {
-                method: 'POST',
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            });
-
-            if (response.ok) {
-                alert("폼 제출 완료!");
-            } else {
-                alert("폼 제출에 실패했습니다.");
+        emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
+            result => {
+                navigate("/registSuccess");
+            },
+            error => {
+                alert("등록에 실패하였습니다. 다시 등록해주세요.")
             }
-        } catch (error) {
-            console.error(error);
-            alert("폼 제출 중 오류가 발생했습니다.");
-        }
-    }
+        );
+    };
 
     const fnTelNoValidation = (e) => {
         e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4);
@@ -83,16 +80,17 @@ function RegistForm() {
                     <div className='mt-5'>
                         <p className='h1'>관심 고객 등록</p>
                     </div>
-                    <form className='mt-5' name="contact" method="POST" data-netlify="true" style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSubmit}>
-                        <input type="hidden" name="contact" value="contact" />
+                    <form className='mt-5' ref={form} style={{ maxWidth: '75%', width: '100%', margin: '0 auto', textAlign: 'left'}} onSubmit={fnSendEmail}>
+                        <input type="hidden" className='text-center' name="site_name" value={`분양완판`}></input>
+                        <input type="hidden" className='text-center' name="date" value={`${formattedDate}`}></input>
                         <div className="form-group mb-3">
                             <label className='text-start' for="name">이름</label>
-                            <input type="text" className="form-control mt-1" id="name" name="name" aria-describedby="emailHelp" placeholder="" required/>
+                            <input type="text" className="form-control mt-1" id="name" name="customer_name" placeholder="" required/>
                         </div>
                         <div className="form-group mb-3">
                             <label for="telNo">연락처</label>
                             <div className="d-flex align-items-center gap-2 mt-1" style={{width: "50%"}}>
-                                <input type="hidden" className="mt-1" name="telNo" value={`${telNo1}-${telNo2}-${telNo3}`}/>
+                                <input type="hidden" className="mt-1" name="customer_telNo" value={`${telNo1}-${telNo2}-${telNo3}`}/>
                                 <select className="form-control mt-1" id="telNo1" value={telNo1} onChange={handleTelNoChange} required>
                                     <option value="">선택</option>
                                     <option value="010">010</option>
