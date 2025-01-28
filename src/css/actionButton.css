@@ -1,3 +1,31 @@
+.reg_customer {
+    z-index:10;
+    position:fixed; 
+    right:155px;
+    bottom:35%;
+    }
+
+.reg_customer_div {
+    background: #26355e;
+    padding-top: 10px;
+    padding-right: 18px;
+    width: 150px;
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-radius: 20px;
+    position: absolute;
+}
+
+.reg_customer_p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+}
+
 .kakao_icon {
     z-index:10;
     position:fixed; 

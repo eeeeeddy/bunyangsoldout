@@ -21,6 +21,9 @@ function NavBar() {
                         <li className='nav-item'>
                             <a className='nav-link text-white' href='#sec04'>드리는 말</a>
                         </li>
+                        <li className='nav-item'>
+                            <a className='nav-link text-white' href='/regist'>관심고객등록</a>
+                        </li>
                     </ul>
                 </nav>
             </PC>
@@ -41,6 +44,9 @@ function NavBar() {
                         </li>
                         <li className='nav-item'>
                             <a className='nav-link text-white pe-1' href='#sec04'>드리는 말</a>
+                        </li>
+                        <li className='nav-item'>
+                            <a className='nav-link text-white pe-1' href='/regist'>관심고객등록</a>
                         </li>
                     </ul>
                 </nav>
