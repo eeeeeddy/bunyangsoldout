@@ -6,9 +6,9 @@ import ActionButton from './actionButton';
 import emailjs from '@emailjs/browser';
 
 function RegistForm() {
-    const serviceId = process.env.EMAILJS_SERVICE_ID
-    const templateId = process.env.EMAILJS_TEMPLATE_ID
-    const publicKey = process.env.EMAILJS_PUBLIC_API_KEY
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_API_KEY
     const navigate = useNavigate();
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
