@@ -78,18 +78,18 @@ function RegistForm() {
         );
     };
 
-    const fnSendKakao = (e) =>{
-        window.Kakao.Share.sendCustom({
-            templateId: 116790,
-            templateArgs: {
-                site_name: "분양완판",
-                customer_name: cutomerName,
-                customer_telNo: `${telNo1}-${telNo2}-${telNo3}`
-            },
-            serverCallbackArgs: {
-                isSendSuccess: "yes"
-            }
-        });
+    const fnSendKakao = (e) =>{ // 전송 시 친구 목록에서 선택하여 보내야하므로 비활성화 - 25.01.29
+        // window.Kakao.Share.sendCustom({
+        //     templateId: 116790,
+        //     templateArgs: {
+        //         site_name: "분양완판",
+        //         customer_name: cutomerName,
+        //         customer_telNo: `${telNo1}-${telNo2}-${telNo3}`
+        //     },
+        //     serverCallbackArgs: {
+        //         isSendSuccess: "yes"
+        //     }
+        // });
     };
 
     const fnTelNoValidation = (e) => {
