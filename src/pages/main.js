@@ -14,7 +14,7 @@ function Main() {
             <PC>
                 <div className="scrollspy-example bg-white p-3 rounded-2 mt-5" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabIndex={0}>
                     <div className='image-container'>
-                        <div id="sec01" className='mb-5'></div>
+                        <div id="sec01" className='mb-5' style={{height:'30px'}}></div>
                         <a href="tel:010-2344-7356">
                             <img src={`${process.env.PUBLIC_URL}/images/001.jpg`} alt="img001"/>
                         </a>
@@ -86,6 +86,7 @@ function Main() {
                 <div className="scrollspy-example bg-white p-3 rounded-2 mt-5" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabIndex={0}>
                 <div className='image-container'>
                         <div id="sec01" className='mb-5'></div>
+                        <div style={{height: '70px'}}></div>
                         <a href="tel:010-2344-7356">
                             <img src={`${process.env.PUBLIC_URL}/images/001.jpg`} alt="img001"/>
                         </a>

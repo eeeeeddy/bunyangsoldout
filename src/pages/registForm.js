@@ -13,7 +13,7 @@ function RegistForm() {
     const navigate = useNavigate();
     const form = useRef();
 
-    const [cutomerName, setCustomerName] = useState('');
+    // const [cutomerName, setCustomerName] = useState('');
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
     const [telNo3, setTelNo3] = useState('');
@@ -48,7 +48,7 @@ function RegistForm() {
     };
 
     const fnSetCustomerName = (e) => {
-        setCustomerName(e.target.value);
+        // setCustomerName(e.target.value);
     };
 
     const fnSendEmail = (e) => {
@@ -99,7 +99,15 @@ function RegistForm() {
     return (
         <div className='' style={{ fontFamily: 'Nanum Gothic' }}>
             <div className='Navbar'>
-                <Navbar />
+                <nav id="navbar-example2" className="navbar bg-dark px-3 fixed-top">
+                    <ul className="nav mx-auto justify-content-center">
+                        <li className='nav-item'>
+                            <a className='nav-link text-white' href='/' style={{ paddingTop: '0px', paddingBottom: '0px'}}>
+                                <img src={`${process.env.PUBLIC_URL}/favicon.png`} alt="logo" style={{ width: '44px', height: 'auto' }}/>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
             <div style={{height: '100px'}}/>
