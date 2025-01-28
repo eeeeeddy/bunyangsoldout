@@ -187,6 +187,7 @@ function RegistForm() {
                         
                         <button type="submit" className="btn btn-dark mt-3">작성</button>
                     </form>
+                    <div style={{height: '150px'}}/>
                 </div>
             </Mobile>
 
