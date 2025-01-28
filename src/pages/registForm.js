@@ -7,7 +7,7 @@ import emailjs from '@emailjs/browser';
 
 function RegistForm() {
     const serviceId = process.env.EMAILJS_SERVICE_ID
-    // const templateId = process.env.EMAILJS_TEMPLATE_ID
+    const templateId = process.env.EMAILJS_TEMPLATE_ID
     const publicKey = process.env.EMAILJS_PUBLIC_API_KEY
     const navigate = useNavigate();
     const [telNo1, setTelNo1] = useState('');
@@ -53,7 +53,7 @@ function RegistForm() {
             return;
         }
 
-        emailjs.sendForm(serviceId, "template_w23m8hp", form.current, publicKey).then(
+        emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
             result => {
                 navigate("/registSuccess");
             },
