@@ -17,7 +17,7 @@ function RegistForm() {
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
     const [telNo3, setTelNo3] = useState('');
-    
+
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
@@ -74,6 +74,7 @@ function RegistForm() {
     };
 
     const fnSendKakao = (e) =>{
+        console.log(cutomerName, `${telNo1}-${telNo2}-${telNo3}`)
         window.Kakao.Share.sendCustom({
             templateId: 116790,
             templateArgs: {
