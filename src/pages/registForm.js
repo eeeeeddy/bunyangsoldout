@@ -53,7 +53,7 @@ function RegistForm() {
             return;
         }
 
-        emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
+        emailjs.sendForm(serviceId, "template_w23m8hp", form.current, publicKey).then(
             result => {
                 navigate("/registSuccess");
             },
