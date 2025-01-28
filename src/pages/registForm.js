@@ -58,6 +58,7 @@ function RegistForm() {
                 navigate("/registSuccess");
             },
             error => {
+                console.log(error)
                 alert("등록에 실패하였습니다. 다시 등록해주세요.")
             }
         );
