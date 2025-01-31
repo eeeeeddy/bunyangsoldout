@@ -20,15 +20,15 @@ exports.handler = async (event) => {
     const requestBody = JSON.parse(event.body);
     
     const response = await fetch(url, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "x-ncp-apigw-timestamp": timestamp,
-        "x-ncp-iam-access-key": accessKey,
-        "x-ncp-apigw-signature-v2": signature,
-    },
-    body: JSON.stringify(requestBody),
-});
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "x-ncp-apigw-timestamp": timestamp,
+            "x-ncp-iam-access-key": accessKey,
+            "x-ncp-apigw-signature-v2": signature,
+        },
+        body: JSON.stringify(requestBody),
+    });
 
     const responseData = await response.json();
 
