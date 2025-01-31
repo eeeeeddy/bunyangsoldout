@@ -98,7 +98,7 @@ function RegistForm() {
         // Web Name, Date, Customer Name, Tel No
         console.log('분양완판', formattedDate, cutomerName, `${telNo1}-${telNo2}-${telNo3}`)
 
-        const response = await fetch("/.netlify/functions/emails", {
+        const response = await fetch("/.netlify/functions/sendSms", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
