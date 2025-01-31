@@ -13,7 +13,7 @@ function RegistForm() {
     const navigate = useNavigate();
     const form = useRef();
 
-    // const [cutomerName, setCustomerName] = useState('');
+    const [cutomerName, setCustomerName] = useState('');
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
     const [telNo3, setTelNo3] = useState('');
@@ -48,7 +48,7 @@ function RegistForm() {
     };
 
     const fnSetCustomerName = (e) => {
-        // setCustomerName(e.target.value);
+        setCustomerName(e.target.value);
     };
 
     const fnSendEmail = (e) => {
@@ -65,6 +65,7 @@ function RegistForm() {
             result => {
                 if (window.Kakao) {
                     fnSendKakao();
+                    fnSendSMS();
                     navigate("/registSuccess");
                 } else {
                     alert("등록에 실패하였습니다. 다시 등록해주세요.")
@@ -91,6 +92,29 @@ function RegistForm() {
         //     }
         // });
     };
+
+    async function fnSendSMS() {
+
+        // Web Name, Date, Customer Name, Tel No
+
+        // const site_name = '분양완판'
+        console.log(formattedDate, cutomerName, telNo1-telNo2-telNo3)
+
+        const response = await fetch("/.netlify/functions/sendSms", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: "SMS",
+                countryCode: "82",
+                from: process.env.REACT_APP_NCP_SEND_NUM,
+                to: [process.env.REACT_APP_NCP_RECEIVE_NUM],
+                content: "테스트 메시지",
+            }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+    }
 
     const fnTelNoValidation = (e) => {
         e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4);
