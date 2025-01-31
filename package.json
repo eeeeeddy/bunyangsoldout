@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "dev": "netlify-lambda serve src/functions",
-    "build": "netlify-lambda build src/functions",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
