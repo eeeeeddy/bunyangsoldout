@@ -96,11 +96,9 @@ function RegistForm() {
     async function fnSendSMS() {
 
         // Web Name, Date, Customer Name, Tel No
+        console.log('분양완판', formattedDate, cutomerName, `${telNo1}-${telNo2}-${telNo3}`)
 
-        // const site_name = '분양완판'
-        console.log(formattedDate, cutomerName, telNo1-telNo2-telNo3)
-
-        const response = await fetch("/.netlify/functions/sendSms", {
+        const response = await fetch("/.netlify/functions/email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
