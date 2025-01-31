@@ -1,7 +1,7 @@
 // NAVER CLOUD PLATFORM SMS 전송
 // Netlify Functions 설정으로 인한 파일 이름 email.js로 설정 (구: sendSms.js)
-const fetch = require("node-fetch");
-const crypto = require("crypto");
+import fetch from 'node-fetch';
+import crypto from "crypto";
 
 exports.handler = async (event) => {
     if (event.httpMethod !== "POST") {
