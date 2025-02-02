@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { PC, Mobile } from "../components/responsive";
 
@@ -22,7 +23,7 @@ function NavBar() {
                             <a className='nav-link text-white' href='#sec04'>드리는 말</a>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link text-white' href='/regist'>관심고객등록</a>
+                            <Link className='nav-link text-white' to="/regist">관심고객등록</Link>
                         </li>
                     </ul>
                 </nav>
@@ -46,7 +47,7 @@ function NavBar() {
                             <a className='nav-link text-white pe-1' href='#sec04'>드리는 말</a>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link text-white pe-1' href='/regist'>관심고객등록</a>
+                            <Link className='nav-link text-white' to="/regist">관심고객등록</Link>
                         </li>
                     </ul>
                 </nav>

@@ -93,25 +93,25 @@ function RegistForm() {
         // });
     };
 
-    async function fnSendSMS() {
+    async function fnSendSMS() { // 발신번호 등록 후 재 테스트 - 25.02.02
 
         // Web Name, Date, Customer Name, Tel No
         console.log('분양완판', formattedDate, cutomerName, `${telNo1}-${telNo2}-${telNo3}`)
 
-        const response = await fetch("/.netlify/functions/sendSms", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                type: "SMS",
-                countryCode: "82",
-                from: process.env.REACT_APP_NCP_SEND_NUM,
-                to: [process.env.REACT_APP_NCP_RECEIVE_NUM],
-                content: "테스트 메시지",
-            }),
-        });
+        // const response = await fetch("/.netlify/functions/sendSms", {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({
+        //         type: "SMS",
+        //         countryCode: "82",
+        //         from: process.env.REACT_APP_NCP_SEND_NUM,
+        //         to: [process.env.REACT_APP_NCP_RECEIVE_NUM],
+        //         content: "테스트 메시지",
+        //     }),
+        // });
 
-        const data = await response.json();
-        console.log(data);
+        // const data = await response.json();
+        // console.log(data);
     }
 
     const fnTelNoValidation = (e) => {
