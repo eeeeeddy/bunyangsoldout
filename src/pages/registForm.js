@@ -13,7 +13,7 @@ function RegistForm() {
     const navigate = useNavigate();
     const form = useRef();
 
-    const [cutomerName, setCustomerName] = useState('');
+    const [customerName, setCustomerName] = useState('');
     const [telNo1, setTelNo1] = useState('');
     const [telNo2, setTelNo2] = useState('');
     const [telNo3, setTelNo3] = useState('');
@@ -84,7 +84,7 @@ function RegistForm() {
         //     templateId: 116790,
         //     templateArgs: {
         //         site_name: "분양완판",
-        //         customer_name: cutomerName,
+        //         customer_name: customerName,
         //         customer_telNo: `${telNo1}-${telNo2}-${telNo3}`
         //     },
         //     serverCallbackArgs: {
@@ -96,7 +96,7 @@ function RegistForm() {
     async function fnSendSMS() { // 발신번호 등록 후 재 테스트 - 25.02.02
 
         // Web Name, Date, Customer Name, Tel No
-        console.log('분양완판', formattedDate, cutomerName, `${telNo1}-${telNo2}-${telNo3}`)
+        console.log('분양완판', formattedDate, customerName, `${telNo1}-${telNo2}-${telNo3}`)
 
         // const response = await fetch("/.netlify/functions/sendSms", {
         //     method: "POST",
